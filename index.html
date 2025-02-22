@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChanonaTKD</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Encabezado (no fijo) */
+        header {
+            background-color: #000;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+
+        /* Barra de navegación deslizable - Nuevo color rojo oscuro */
+        .nav-bar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #8B0000; /* Rojo oscuro elegante */
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        .nav-bar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #FFFFFF; /* Blanco puro para visibilidad sobre fondo rojo */
+            display: block;
+            opacity: 0; /* Inicialmente invisibles */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Transición suave para opacidad y transformación */
+            transform: translateX(-20px); /* Desplazamiento inicial fuera de la pantalla */
+        }
+        .nav-bar a:hover {
+            color: #fff; /* Blanco puro para mantener contraste en hover */
+        }
+        .nav-toggle {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            color: #fff;
+            z-index: 1001;
+        }
+
+        /* Animación para los enlaces al abrir/cerrar la barra */
+        .nav-bar.open a {
+            opacity: 1; /* Visible al abrir */
+            transform: translateX(0); /* Regresa a su posición normal */
+        }
+
+        /* Contenedor principal */
+        .content {
+            padding: 20px;
+        }
+
+        /* Secciones principales */
+        .section {
+            margin-bottom: 50px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        /* Contenedor para textos centrados y organizados */
+        .text-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* Títulos con fuente creativa */
+        .section-title {
+            text-align: center;
+            color: #fff;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #c0c0c0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Texto general, profesional y elegante */
+        .section-text {
+            text-align: center;
+            color: #fff;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+
+        /* Botones elegantes con márgenes */
+        .btn {
+            display: block;
+            margin: 15px auto; /* Márgenes arriba y abajo, centrado horizontalmente */
+            padding: 12px 25px;
+            background-color: #8B0000; /* Rojo más oscuro y elegante */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            border: 2px solid #8B0000;
+            font-weight: bold;
+            transition: 0.3s;
+            text-align: center;
+            cursor: pointer;
+            width: fit-content;
+        }
+        .btn:hover {
+            background-color: #fff;
+            color: #8B0000;
+            border-color: #fff;
+        }
+
+        /* Sección de bienvenida */
+        #welcome .section-text {
+            font-size: 1.2em;
+        }
+
+        /* Planes de entrenamiento con degradado gris/negro */
+        #plans .plan {
+            margin: 20px 0;
+            padding: 15px;
+            background: linear-gradient(to bottom, #444444, #1a1a1a);
+            border-radius: 10px;
+            opacity: 0.9;
+        }
+
+        /* Contenedor específico para texto en planes, con diseño creativo */
+        #plans .plan-text-container {
+            background: rgba(255, 255, 255, 0.1); /* Fondo blanco con opacidad baja */
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in;
+        }
+        #plans .plan-title {
+            color: #FFFFFF; /* Blanco puro para mejor visibilidad */
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #fff, #c0c0c0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        #plans .plan-price {
+            color: #FFFFFF; /* Blanco puro para mejor visibilidad */
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            font-size: 1.1em;
+            padding: 5px;
+            background: rgba(139, 0, 0, 0.1); /* Toque rojo sutil */
+            border-radius: 5px;
+        }
+        #plans .plan ul {
+            list-style: none;
+            text-align: center;
+            padding: 0;
+        }
+        #plans .plan ul li {
+            margin: 8px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+        #plans .plan ul li::before {
+            content: "⚡"; /* Ícono estilizado como un rayo para dinamismo */
+            position: absolute;
+            left: 0;
+            color: #8B0000; /* Rojo oscuro para contraste */
+            font-size: 1em;
+        }
+
+        /* Contenedores para textos largos en otras secciones, con diseño creativo */
+        .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container {
+            background: rgba(255, 255, 255, 0.1); /* Fondo blanco con opacidad baja */
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in;
+        }
+
+        /* Enfoque de mi trabajo - Dinámico y creativo */
+        #focus {
+            background: linear-gradient(to bottom, #1a1a1a, #2d2d2d);
+            padding: 40px;
+        }
+        #focus .focus-item {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: rgba(139, 0, 0, 0.1); /* Rojo más oscuro con opacidad */
+            border-radius: 20px;
+            color: #fff;
+            font-weight: bold;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Storytelling y curriculum con viñetas creativas */
+        #curriculum ul, #experience ul {
+            list-style: none;
+            text-align: center;
+            padding: 0;
+        }
+        #curriculum ul li, #experience ul li {
+            margin: 8px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+        #curriculum ul li::before, #experience ul li::before {
+            content: "⚡"; /* Ícono estilizado como un rayo para dinamismo */
+            position: absolute;
+            left: 0;
+            color: #8B0000; /* Rojo oscuro para contraste */
+            font-size: 1em;
+        }
+
+        /* Contacto (placeholder para redirección futura) */
+        #contact .section-text a {
+            color: #8B0000; /* Rojo más oscuro */
+            text-decoration: none;
+        }
+
+        /* Botón de WhatsApp fijo */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
+        }
+        .whatsapp-btn img {
+            width: 30px;
+            height: 30px;
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Media Queries responsivas para todos los dispositivos */
+        @media (max-width: 480px) {
+            .section {
+                padding: 15px;
+            }
+            .section-text {
+                font-size: 0.9em;
+            }
+            .section-title {
+                font-size: 1.2em;
+            }
+            .nav-toggle {
+                left: 10px;
+                top: 10px;
+                font-size: 25px;
+            }
+            .logo {
+                max-width: 120px;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+                margin: 10px auto; /* Ajuste para móviles pequeños */
+            }
+            .whatsapp-btn {
+                bottom: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            .whatsapp-btn img {
+                width: 25px;
+                height: 25px;
+            }
+            #focus .focus-item {
+                font-size: 0.8em;
+                padding: 8px 15px;
+                margin: 3px;
+            }
+            #plans .plan, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container {
+                padding: 12px;
+            }
+            .plan-text-container, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container {
+                padding: 10px;
+                margin: 5px 0;
+            }
+            #plans .plan-title, #story .section-title, #curriculum .section-title, #experience .section-title, #why-me .section-title {
+                font-size: 1.2em;
+            }
+            .nav-bar a {
+                font-size: 16px; /* Ajuste para móviles pequeños */
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .section {
+                padding: 20px;
+            }
+            .section-text {
+                font-size: 1em;
+            }
+            .section-title {
+                font-size: 1.4em;
+            }
+            .logo {
+                max-width: 140px;
+            }
+            .nav-toggle {
+                left: 15px;
+                top: 15px;
+                font-size: 28px;
+            }
+            .btn {
+                padding: 12px 22px;
+                font-size: 1em;
+                margin: 12px auto; /* Ajuste para tablets */
+            }
+            #focus .focus-item {
+                font-size: 0.9em;
+                padding: 10px 18px;
+                margin: 5px;
+            }
+            #plans .plan, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container {
+                padding: 15px;
+            }
+            .plan-text-container, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container {
+                padding: 12px;
+                margin: 8px 0;
+            }
+            .nav-bar a {
+                font-size: 18px; /* Ajuste para tablets */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .content {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .section {
+                padding: 30px;
+            }
+            .section-text {
+                font-size: 1.1em;
+            }
+            .section-title {
+                font-size: 1.6em;
+            }
+            .nav-toggle {
+                left: 20px;
+                top: 20px;
+                font-size: 30px;
+            }
+            .nav-bar {
+                padding-top: 80px;
+            }
+            .nav-bar a {
+                font-size: 22px; /* Ajuste para desktops */
+            }
+            #focus .focus-item {
+                font-size: 1em;
+                padding: 12px 22px;
+                margin: 7px;
+            }
+            #plans .plan, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container {
+                padding: 20px;
+            }
+            .plan-text-container, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container {
+                padding: 15px;
+                margin: 10px 0;
+            }
+        }
+
+        /* Animaciones suaves para navegación */
+        .smooth-scroll {
+            scroll-behavior: smooth;
+            transition: scroll-top 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="smooth-scroll">
+    <header>
+        <img src="logo.png" alt="ChanonaTKD Logo" class="logo">
+    </header>
+
+    <div class="nav-toggle" onclick="toggleNav()">☰</div>
+    <div id="sideNav" class="nav-bar">
+        <a href="#plans">Mis paquetes</a>
+        <a href="#contact">Contacto</a>
+        <a href="#experience">Mi experiencia</a>
+        <a href="#story">Quién soy yo</a>
+        <a href="#why-me">Por qué soy el mejor en esto</a>
+        <a href="#exercises">Ejercicios</a> <!-- Placeholder para edición futura -->
+    </div>
+
+    <div class="content">
+        <section id="welcome" class="section">
+            <h1 class="section-title">¡Bienvenido, atleta de alto rendimiento!</h1>
+            <div class="text-container">
+                <p class="section-text">Estás a punto de elevar tu nivel al máximo con mi entrenamiento personalizado en Taekwondo. Prepárate para transformar tu técnica y rendimiento con un enfoque profesional, preciso y apasionado que te llevará a alcanzar tus metas más ambiciosas.</p>
+            </div>
+        </section>
+
+        <section id="plans" class="section">
+            <h1 class="section-title">Mis Planes de Entrenamiento</h1>
+            <div class="text-container">
+                <p class="section-text">Si buscas perfeccionar tu técnica, competir al más alto nivel o entrenar con un enfoque profesional, te ofrezco opciones personalizadas que se adaptan a tus necesidades. Descubre los planes que transformarán tu rendimiento.</p>
+            </div>
+
+            <div class="plan">
+                <div class="plan-text-container">
+                    <h2 class="plan-title">Plan Principiante</h2>
+                    <p class="plan-price">📌 Entrenamientos en Línea</p>
+                    <ul>
+                        <li>✅ Sesión única – $500</li>
+                        <li>Corrección en vivo y análisis técnico</li>
+                        <li>Ideal para ajustes específicos</li>
+                    </ul>
+                    <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                </div>
+            </div>
+
+            <div class="plan">
+                <div class="plan-text-container">
+                    <h2 class="plan-title">Plan Avanzado</h2>
+                    <p class="plan-price">📌 Entrenamientos en Línea</p>
+                    <ul>
+                        <li>✅ 4 sesiones – $1,800</li>
+                        <li>Entrenamiento progresivo</li>
+                        <li>Enfoque en competencia y rendimiento</li>
+                    </ul>
+                    <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                </div>
+            </div>
+
+            <div class="plan">
+                <div class="plan-text-container">
+                    <h2 class="plan-title">Plan Premium</h2>
+                    <p class="plan-price">📌 Entrenamientos en Línea</p>
+                    <ul>
+                        <li>✅ 8 sesiones – $3,500</li>
+                        <li>Perfeccionamiento técnico</li>
+                        <li>Estrategia competitiva avanzada</li>
+                    </ul>
+                    <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                </div>
+            </div>
+
+            <div class="plan">
+                <div class="plan-text-container">
+                    <h2 class="plan-title">Entrenamientos a Domicilio</h2>
+                    <p class="plan-price">📌 San Cristóbal de las Casas y Tuxtla Gutiérrez</p>
+                    <ul>
+                        <li>✅ 1 sesión/semana – $800</li>
+                        <li>✅ 2 sesiones/semana – $750 (cada sesión)</li>
+                        <li>✅ 3 sesiones/semana – $700 (cada sesión)</li>
+                        <li>Técnica y desarrollo físico personalizado</li>
+                        <li>Gasolina: $300/sesión</li>
+                        <li>Pago antes del lunes 12:00 p.m.</li>
+                    </ul>
+                    <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                </div>
+            </div>
+
+            <div class="plan">
+                <div class="plan-text-container">
+                    <h2 class="plan-title">Seminarios y Campamentos</h2>
+                    <p class="plan-price">📌 Experiencias Personalizadas</p>
+                    <ul>
+                        <li>✅ Seminarios: Poomsae, Freestyle, técnica</li>
+                        <li>✅ Campamentos: Alto rendimiento</li>
+                        <li>✅ Asistencia en competencias</li>
+                        <li>Aprendizaje intensivo y estratégico</li>
+                    </ul>
+                    <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                </div>
+            </div>
+
+            <div class="text-container">
+                <p class="section-text">🔹 ¡Entrena con un referente del Taekwondo en México en Freestyle y Poomsae y forma parte de un entrenamiento de clase mundial! 🔥</p>
+                <p class="section-text">📱 WhatsApp: 961 139 3791<br>📧 Correo: bryantkd52@gmail.com</p>
+                <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+            </div>
+        </section>
+
+        <section id="focus" class="section">
+            <h1 class="section-title">El Enfoque de Mi Trabajo:</h1>
+            <div class="text-container focus-items">
+                <span class="focus-item">Técnica precisa</span>
+                <span class="focus-item">Explosividad y potencia</span>
+                <span class="focus-item">Control corporal</span>
+                <span class="focus-item">Corrección en vivo</span>
+                <span class="focus-item">Estrategia competitiva</span>
+                <span class="focus-item">Freestyle avanzado</span>
+                <span class="focus-item">Pateo acrobático</span>
+                <span class="focus-item">Fluidez y ritmo</span>
+                <span class="focus-item">Preparación mental</span>
+                <span class="focus-item">Optimización del desempeño</span>
+                <span class="focus-item">Transiciones fluidas</span>
+                <span class="focus-item">Ajustes técnicos</span>
+                <span class="focus-item">Alineación corporal</span>
+                <span class="focus-item">Desarrollo motriz</span>
+                <span class="focus-item">Acondicionamiento físico</span>
+                <span class="focus-item">Confianza y seguridad</span>
+                <span class="focus-item">Resistencia y control</span>
+                <span class="focus-item">Eficiencia en giros</span>
+                <span class="focus-item">Patadas dinámicas</span>
+                <span class="focus-item">Dominio del reglamento</span>
+            </div>
+        </section>
+
+        <section id="story" class="section">
+            <h1 class="section-title">Quién Soy Yo</h1>
+            <div class="story-text-container">
+                <p class="section-text">Mi nombre es Bryan Herrera Chanona, y mi vida ha girado en torno al Taekwondo desde que era un niño. Como cinta negra 3er dan, he dedicado 17 años a esta disciplina y más de 11 a forjar atletas en Poomsae y Freestyle, transformando sueños en medallas que brillan en escenarios mundiales. Mi historia comenzó con mi padre, un maestro de Kung Fu que me guió desde la cuna, instilándome una pasión inquebrantable por las artes marciales. El Taekwondo se convirtió en mi hogar, un espacio donde encontré mi propósito.</p>
+                <p class="section-text">Crecer en México, donde el Poomsae y el Freestyle eran casi desconocidos, fue un desafío. Me formé de manera autodidacta, enfrentando la ausencia de guías o recursos, pero mi determinación me llevó a competir contra gigantes de Corea, Estados Unidos y más allá, demostrando que la estatura o las barreras culturales no definen el corazón de un guerrero. Mi viaje a Corea del Sur, la cuna del Taekwondo, fue un punto de inflexión: descubrí métodos avanzados que aún no llegaban a mi país, y supe que mi misión era compartirlos, innovar y elevar esta disciplina.</p>
+                <p class="section-text">En 2020, la pandemia me arrancó seminarios, talleres y campamentos planeados, pero también me dio la oportunidad de nacer de nuevo como entrenador en línea, a través de mi canal de YouTube. Fue un acto de fe: compartí mi conocimiento sin esperar nada a cambio, conectando con personas extraordinarias que hoy son mi apoyo y mi fuerza. Recuerdo a mi primera alumna, una joven que confió en mí por completo; hoy, es doble campeona mundial, medallista nacional en los Juegos Conade y estudiante en una de las mejores universidades de México, en Nuevo León. Su éxito, y el de tantos otros, me impulsa a seguir adelante.</p>
+                <p class="section-text">Mi visión es audaz: llevar el Poomsae y el Freestyle a los Juegos Olímpicos, haciendo de México una potencia global en estas modalidades. Inspirado por íconos como María Espinoza, Memo Pérez y Bruce Lee—cuyo mensaje de perseverancia y mentalidad me guía—, sueño con el oro olímpico desde que, de niño, visualicé mi victoria en un sueño que aún arde en mi alma. Soy un apasionado de las artes marciales, la tecnología, la edición de video y la creación de páginas web, pero mi corazón late por el Taekwondo y por ti, atleta que lees esto. Únete a mí en esta aventura épica; juntos, escribiremos la historia de un nuevo legado en el tatami.</p>
+            </div>
+        </section>
+
+        <section id="curriculum" class="section">
+            <h1 class="section-title">Mi Currículum y Logros (Lo Más Destacado)</h1>
+            <div class="curriculum-text-container">
+                <h2 class="section-title" style="font-size: 1.3em; color: #8B0000;">Como Entrenador:</h2>
+                <ul>
+                    <li>Ex-entrenador de la selección nacional de Poomsae</li>
+                    <li>2 medallas de oro, 2 de plata y múltiples de bronce en mundiales por México</li>
+                    <li>Múltiples medallas internacionales con atletas de otros países</li>
+                    <li>Entrenador suplente en EE.UU.</li>
+                    <li>Formé múltiples medallistas en nacionales mexicanos</li>
+                    <li>MVP como mejor atleta del mundial</li>
+                </ul>
+
+                <h2 class="section-title" style="font-size: 1.3em; color: #8B0000;">Como Atleta:</h2>
+                <ul>
+                    <li>Mundialista destacado</li>
+                    <li>Mejor Atleta de Canadá (MVP)</li>
+                    <li>Multimedallista de oro en Corea del Sur y eventos globales</li>
+                    <li>4 veces campeón nacional invicto</li>
+                    <li>Mejor atleta de Poomsae y Freestyle en México</li>
+                    <li>Premio Estatal del Deporte y reconocimientos destacados</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h1 class="section-title">Mi Experiencia</h1>
+            <div class="experience-text-container">
+                <ul>
+                    <li>17 años practicando Taekwondo y 11 años entrenando atletas en Poomsae y Freestyle.</li>
+                    <li>Formé campeones mundiales y medallistas internacionales con mi enfoque único.</li>
+                    <li>Competí en eventos nacionales e internacionales, ganando prestigio global.</li>
+                    <li>Mi formación en Corea del Sur me dotó de técnicas avanzadas y estrategias probadas.</li>
+                    <li>Guío a atletas al éxito con metodologías personalizadas y dedicación total.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="why-me" class="section">
+            <h1 class="section-title">Por Qué Soy el Mejor en Esto</h1>
+            <div class="why-me-text-container">
+                <p class="section-text">Déjame contarte por qué soy el entrenador que necesitas para llevar tu Taekwondo al siguiente nivel. Desde que el Taekwondo se convirtió en mi vida, he vivido y respirado esta disciplina con una pasión que arde como un fuego eterno. Como atleta, enfrenté a los mejores del mundo—gigantes de Corea, Estados Unidos y más—allí donde me desafiaron, y los vencí con mi corazón, mi mente y mi técnica impecable, demostrando que la verdadera grandeza no tiene límites.</p>
+                <p class="section-text">Ahora, como entrenador de élite, he moldeado campeones mundiales y medallistas internacionales, desde México hasta tierras lejanas, con un enfoque innovador que aprendí en la cuna del Taekwondo, Corea del Sur. Mi metodología no es solo técnica; es una revolución personalizada que desbloquea tu potencial, inspirada por íconos como Bruce Lee, María Espinoza y Memo Pérez, quienes encendieron mi fuego interior. En 2020, la pandemia pudo detener mis seminarios, pero no mi visión: lancé mi entrenamiento en línea, transformando pantallas en tatamis, llevando a atletas como mi alumna—hoy doble campeona mundial—a la gloria.</p>
+                <p class="section-text">Mi sueño es audaz: llevar el Poomsae y el Freestyle a los Juegos Olímpicos, haciendo de México una potencia global. Pero no estoy solo en esta misión—te necesito a ti. Mi dedicación es total, mi compromiso inquebrantable, y mi pasión, infinita. He innovado sin cesar, creando estrategias que desafían lo convencional, y ahora te ofrezco esa misma transformación. Si buscas un guía que no solo entrene tu cuerpo, sino que también encienda tu espíritu, soy yo. Contáctame hoy, y juntos conquistaremos el tatami como nunca antes.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h1 class="section-title">Contacto</h1>
+            <div class="text-container">
+                <p class="section-text">Si deseas más información o estás listo para comenzar tu transformación, contáctame directamente:<br><a href="contact.html" target="_self">Ir a Contacto</a></p>
+            </div>
+        </section>
+    </div>
+
+    <a href="https://wa.me/529611393791" class="whatsapp-btn" target="_self">
+        <img src="whatsapp-icon.png" alt="WhatsApp">
+    </a>
+
+    <footer>
+        <p>© 2025 ChanonaTKD - Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+        function toggleNav() {
+            const nav = document.getElementById("sideNav");
+            const links = nav.getElementsByTagName('a');
+
+            if (nav.style.width === "250px") {
+                // Cerrar: Desvanecer y mover los enlaces hacia la izquierda
+                for (let link of links) {
+                    link.style.opacity = "0";
+                    link.style.transform = "translateX(-20px)";
+                }
+                setTimeout(() => {
+                    nav.style.width = "0";
+                }, 500); // Espera a que termine la transición de opacidad
+            } else {
+                // Abrir: Mostrar la barra y luego desvanecer los enlaces hacia su posición
+                nav.style.width = "250px";
+                setTimeout(() => {
+                    for (let link of links) {
+                        link.style.opacity = "1";
+                        link.style.transform = "translateX(0)";
+                    }
+                }, 50); // Pequeño retraso para sincronizar con la apertura
+            }
+        }
+
+        // Smooth scrolling con aceleración
+        document.querySelectorAll('.nav-bar a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                const start = window.pageYOffset;
+                const distance = targetElement.getBoundingClientRect().top;
+                let startTime = null;
+
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const run = easeInOutQuad(timeElapsed, start, distance, 1000);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < 1000) requestAnimationFrame(animation);
+                }
+
+                // Función de easing para un efecto suave con aceleración
+                function easeInOutQuad(t, b, c, d) {
+                    t /= d / 2;
+                    if (t < 1) return c / 2 * t * t + b;
+                    t--;
+                    return -c / 2 * (t * (t - 2) - 1) + b;
+                }
+
+                requestAnimationFrame(animation);
+                const nav = document.getElementById("sideNav");
+                nav.style.width = "0"; // Cierra la barra de navegación después de hacer clic
+            });
+        });
+    </script>
+</body>
+</html>
