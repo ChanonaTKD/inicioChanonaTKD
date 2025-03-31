@@ -192,14 +192,20 @@
             padding: 0;
         }
         #plans .plan ul li {
-            margin: 8px 0;
+            margin: 8px 10px; /* Añadir margen horizontal */
             position: relative;
-            padding-left: 20px;
+            padding-left: 25px; /* Espacio para el ícono */
+            display: inline-block; /* Para que se alineen horizontalmente si es necesario */
+            vertical-align: middle; /* Alinear verticalmente */
+            text-align: left;
+            width: auto; /* Ajuste de ancho */
         }
         #plans .plan ul li::before {
             content: "⚡"; /* Ícono estilizado como un rayo para dinamismo */
             position: absolute;
             left: 0;
+            top: 50%; /* Centrar verticalmente el ícono */
+            transform: translateY(-50%); /* Ajuste fino para centrar */
             color: #8B0000; /* Rojo oscuro para contraste */
             font-size: 1em;
         }
@@ -219,6 +225,7 @@
         #focus {
             background: linear-gradient(to bottom, #1a1a1a, #2d2d2d);
             padding: 40px;
+            text-align: center; /* Centrar los elementos flotantes */
         }
         #focus .focus-item {
             display: inline-block;
@@ -239,52 +246,40 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Storytelling y curriculum con viñetas creativas */
+        /* Ajustes para Curriculum y Experiencia */
         #curriculum ul, #experience ul {
             list-style: none;
-            text-align: center;
+            text-align: center; /* Centra el bloque de la lista */
             padding: 0;
+            margin: 0 auto; /* Asegura centrado */
+            max-width: 600px; /* Limita el ancho para mejor lectura */
         }
         #curriculum ul li, #experience ul li {
-            margin: 8px 0;
+            margin: 12px 0; /* Más espacio vertical */
             position: relative;
-            padding-left: 20px;
+            padding-left: 30px; /* Más espacio para el ícono */
+            text-align: left; /* Alinea el texto a la izquierda dentro del li */
+            display: block; /* Asegura que cada li ocupe su línea */
+            line-height: 1.6; /* Mejora legibilidad */
         }
         #curriculum ul li::before, #experience ul li::before {
-            content: "⚡"; /* Ícono estilizado como un rayo para dinamismo */
+            content: "⚡"; /* Ícono estilizado */
             position: absolute;
             left: 0;
-            color: #8B0000; /* Rojo oscuro para contraste */
-            font-size: 1em;
+            top: 50%;
+            transform: translateY(-50%); /* Centrado vertical del ícono */
+            color: #8B0000; /* Rojo oscuro */
+            font-size: 1.1em; /* Ícono ligeramente más grande */
         }
 
         /* Contacto (placeholder para redirección futura) */
         #contact .section-text a {
-            color: #8B0000; /* Rojo más oscuro */
+            color: #FFD700; /* Color dorado para enlaces de contacto */
             text-decoration: none;
+            font-weight: bold;
         }
-
-        /* Botón de WhatsApp fijo */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25D366;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            transition: 0.3s;
-        }
-        .whatsapp-btn img {
-            width: 30px;
-            height: 30px;
-        }
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
+        #contact .section-text a:hover {
+            text-decoration: underline;
         }
 
         /* Footer */
@@ -296,164 +291,77 @@
             margin-top: 50px;
         }
 
-        /* Media Queries responsivas para todos los dispositivos */
+        /* Media Queries responsivas */
         @media (max-width: 480px) {
-            .section {
-                padding: 15px;
-            }
-            .section-text {
-                font-size: 0.9em;
-            }
-            .section-title {
-                font-size: 1.2em;
-            }
-            .nav-toggle {
-                left: 10px;
-                top: 10px;
-                font-size: 25px;
-            }
-            .logo {
-                max-width: 120px;
-            }
-            .btn {
-                padding: 10px 20px;
-                font-size: 0.9em;
-                margin: 10px auto; /* Ajuste para móviles pequeños */
-            }
-            .whatsapp-btn {
-                bottom: 10px;
-                right: 10px;
-                width: 40px;
-                height: 40px;
-            }
-            .whatsapp-btn img {
-                width: 25px;
-                height: 25px;
-            }
-            #focus .focus-item {
-                font-size: 0.8em;
-                padding: 8px 15px;
-                margin: 3px;
-            }
-            #plans .plan, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container {
-                padding: 12px;
-            }
-            .plan-text-container, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container {
-                padding: 10px;
-                margin: 5px 0;
-            }
-            #plans .plan-title, #story .section-title, #curriculum .section-title, #experience .section-title, #why-me .section-title, #ejercicios .section-title {
-                font-size: 1.2em;
-            }
-            .nav-bar a {
-                font-size: 16px; /* Ajuste para móviles pequeños */
-            }
+            .section { padding: 15px; }
+            .section-text { font-size: 0.9em; }
+            .section-title { font-size: 1.2em; }
+            .nav-toggle { left: 10px; top: 10px; font-size: 25px; }
+            .logo { max-width: 120px; }
+            .btn { padding: 10px 20px; font-size: 0.9em; margin: 10px auto; }
+             #plans .plan ul li { display: block; text-align: center; padding-left: 25px; margin: 8px auto; }
+             #plans .plan ul li::before { left: 10px; /* Ajusta posición del ícono si es necesario */ }
+            #focus .focus-item { font-size: 0.8em; padding: 8px 15px; margin: 3px; }
+            #plans .plan, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container { padding: 12px; }
+            .plan-text-container, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container { padding: 10px; margin: 5px 0; }
+            #plans .plan-title, #story .section-title, #curriculum .section-title, #experience .section-title, #why-me .section-title, #ejercicios .section-title { font-size: 1.2em; }
+            .nav-bar a { font-size: 16px; }
+             #curriculum ul li, #experience ul li { padding-left: 25px; text-align: center; }
+             #curriculum ul li::before, #experience ul li::before { left: 5px; }
         }
 
         @media (min-width: 481px) and (max-width: 768px) {
-            .section {
-                padding: 20px;
-            }
-            .section-text {
-                font-size: 1em;
-            }
-            .section-title {
-                font-size: 1.4em;
-            }
-            .logo {
-                max-width: 140px;
-            }
-            .nav-toggle {
-                left: 15px;
-                top: 15px;
-                font-size: 28px;
-            }
-            .btn {
-                padding: 12px 22px;
-                font-size: 1em;
-                margin: 12px auto; /* Ajuste para tablets */
-            }
-            #focus .focus-item {
-                font-size: 0.9em;
-                padding: 10px 18px;
-                margin: 5px;
-            }
-            #plans .plan, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container {
-                padding: 15px;
-            }
-            .plan-text-container, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container {
-                padding: 12px;
-                margin: 8px 0;
-            }
-            .nav-bar a {
-                font-size: 18px; /* Ajuste para tablets */
-            }
+            .section { padding: 20px; }
+            .section-text { font-size: 1em; }
+            .section-title { font-size: 1.4em; }
+            .logo { max-width: 140px; }
+            .nav-toggle { left: 15px; top: 15px; font-size: 28px; }
+            .btn { padding: 12px 22px; font-size: 1em; margin: 12px auto; }
+             #plans .plan ul li { display: inline-block; text-align: left; }
+            #focus .focus-item { font-size: 0.9em; padding: 10px 18px; margin: 5px; }
+            #plans .plan, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container { padding: 15px; }
+            .plan-text-container, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container { padding: 12px; margin: 8px 0; }
+            .nav-bar a { font-size: 18px; }
+             #curriculum ul li, #experience ul li { text-align: left; }
         }
 
         @media (min-width: 769px) {
-            .content {
-                max-width: 800px;
-                margin: 0 auto;
-            }
-            .section {
-                padding: 30px;
-            }
-            .section-text {
-                font-size: 1.1em;
-            }
-            .section-title {
-                font-size: 1.6em;
-            }
-            .nav-toggle {
-                left: 20px;
-                top: 20px;
-                font-size: 30px;
-            }
-            .nav-bar {
-                padding-top: 80px;
-            }
-            .nav-bar a {
-                font-size: 22px; /* Ajuste para desktops */
-            }
-            #focus .focus-item {
-                font-size: 1em;
-                padding: 12px 22px;
-                margin: 7px;
-            }
-            #plans .plan, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container {
-                padding: 20px;
-            }
-            .plan-text-container, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container {
-                padding: 15px;
-                margin: 10px 0;
-            }
+            .content { max-width: 800px; margin: 0 auto; }
+            .section { padding: 30px; }
+            .section-text { font-size: 1.1em; }
+            .section-title { font-size: 1.6em; }
+            .nav-toggle { left: 20px; top: 20px; font-size: 30px; }
+            .nav-bar { padding-top: 80px; }
+            .nav-bar a { font-size: 22px; }
+            #focus .focus-item { font-size: 1em; padding: 12px 22px; margin: 7px; }
+             #plans .plan ul li { display: inline-block; text-align: left; }
+            #plans .plan, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container { padding: 20px; }
+            .plan-text-container, .story-text-container, .curriculum-text-container, .experience-text-container, .why-me-text-container, .ejercicios-text-container { padding: 15px; margin: 10px 0; }
+             #curriculum ul li, #experience ul li { text-align: left; }
         }
 
         /* Animaciones suaves para navegación */
-        .smooth-scroll {
-            scroll-behavior: smooth;
-            transition: scroll-top 0.5s ease-out;
-        }
+        html { scroll-behavior: smooth; }
+
     </style>
 </head>
-<body class="smooth-scroll">
+<body>
     <header>
         <img src="logo.png" alt="ChanonaTKD Logo" class="logo">
     </header>
 
     <div class="nav-toggle" onclick="toggleNav()">☰</div>
     <div id="sideNav" class="nav-bar">
-        <a href="#plans">Mis paquetes</a>
-        <a href="#contact">Contacto</a>
-        <a href="#experience">Mi experiencia</a>
-        <a href="#story">Quién soy yo</a>
-        <a href="#why-me">Por qué soy el mejor en esto</a>
-        <a href="#ejercicios">Ejercicios</a> <!-- Enlace añadido a la barra de navegación -->
+        <a href="#plans" onclick="closeNav()">Mis paquetes</a>
+        <a href="#contact" onclick="closeNav()">Contacto</a>
+        <a href="#experience" onclick="closeNav()">Mi experiencia</a>
+        <a href="#story" onclick="closeNav()">Quién soy yo</a>
+        <a href="#ejercicios" onclick="closeNav()">Ejercicios</a>
     </div>
 
     <div class="content">
         <section id="welcome" class="section">
-            <h1 class="section-title">¡Bienvenido, atleta de alto rendimiento!</h1>
+            <h1 class="section-title">¡Bienvenido/a, Campeón/a!</h1>
             <div class="text-container">
                 <p class="section-text">Estás a punto de elevar tu nivel al máximo con mi entrenamiento personalizado en Taekwondo. Prepárate para transformar tu técnica y rendimiento con un enfoque profesional, preciso y apasionado que te llevará a alcanzar tus metas más ambiciosas.</p>
             </div>
@@ -470,11 +378,11 @@
                     <h2 class="plan-title">Plan Principiante</h2>
                     <p class="plan-price">📌 Entrenamientos en Línea</p>
                     <ul>
-                        <li>✅ Sesión única – $500</li>
+                        <li>✅ Sesión única – $500 MXN / 25 EUR</li>
                         <li>Corrección en vivo y análisis técnico</li>
                         <li>Ideal para ajustes específicos</li>
                     </ul>
-                    <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                    <a href="https://t.me/chanonatkd_members" class="btn" target="_blank">Ir a Contacto</a>
                 </div>
             </div>
 
@@ -483,11 +391,11 @@
                     <h2 class="plan-title">Plan Avanzado</h2>
                     <p class="plan-price">📌 Entrenamientos en Línea</p>
                     <ul>
-                        <li>✅ 4 sesiones – $1,800</li>
+                        <li>✅ 4 sesiones – $1,800 MXN / 90 EUR</li>
                         <li>Entrenamiento progresivo</li>
                         <li>Enfoque en competencia y rendimiento</li>
                     </ul>
-                    <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                    <a href="https://t.me/chanonatkd_members" class="btn" target="_blank">Ir a Contacto</a>
                 </div>
             </div>
 
@@ -496,27 +404,28 @@
                     <h2 class="plan-title">Plan Premium</h2>
                     <p class="plan-price">📌 Entrenamientos en Línea</p>
                     <ul>
-                        <li>✅ 8 sesiones – $3,500</li>
+                        <li>✅ 8 sesiones – $3,500 MXN / 180 EUR</li>
                         <li>Perfeccionamiento técnico</li>
                         <li>Estrategia competitiva avanzada</li>
                     </ul>
-                    <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                    <a href="https://t.me/chanonatkd_members" class="btn" target="_blank">Ir a Contacto</a>
                 </div>
             </div>
 
-            <div class="plan">
+             <div class="plan">
                 <div class="plan-text-container">
-                    <h2 class="plan-title">Entrenamientos a Domicilio</h2>
-                    <p class="plan-price">📌 San Cristóbal de las Casas y Tuxtla Gutiérrez</p>
-                    <ul>
-                        <li>✅ 1 sesión/semana – $800</li>
-                        <li>✅ 2 sesiones/semana – $750 (cada sesión)</li>
-                        <li>✅ 3 sesiones/semana – $700 (cada sesión)</li>
-                        <li>Técnica y desarrollo físico personalizado</li>
-                        <li>Gasolina: $300/sesión</li>
-                        <li>Pago antes del lunes 12:00 p.m.</li>
-                    </ul>
-                    <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                    <h2 class="plan-title">Entrenamiento de Prueba</h2>
+                     <p class="plan-price">📌 Sesión Única (45 minutos)</p>
+                     <p class="section-text" style="font-weight: bold; color: #4CAF50;">Opción 1: ¡GRATIS!</p>
+                     <p class="section-text" style="font-size: 0.95em; line-height: 1.6;">
+                        Comparte mi página/canal en YouTube, Facebook, Instagram, Threads, etc., dale like/seguir a cada una y envía capturas de pantalla al correo <a href="mailto:chanonatkd98@gmail.com" style="color: #FFD700;">chanonatkd98@gmail.com</a> con el asunto: "QUIERO MI ENTRENAMIENTO GRATIS". Incluye en el correo tu usuario de Telegram para enviarte el enlace y las fechas disponibles.
+                    </p>
+
+                    <p class="section-text" style="font-weight: bold; margin-top: 20px; color: #2196F3;">Opción 2: Pago</p>
+                     <p class="section-text" style="font-size: 0.95em; line-height: 1.6;">
+                        Costo: $350 MXN / 20 EUR. <br>
+                        Si prefieres pagar, envía un correo a <a href="mailto:chanonatkd98@gmail.com" style="color: #FFD700;">chanonatkd98@gmail.com</a> indicando tu interés y tu usuario de Telegram. Nos pondremos en contacto contigo para continuar con el proceso.
+                     </p>
                 </div>
             </div>
 
@@ -530,14 +439,15 @@
                         <li>✅ Asistencia en competencias</li>
                         <li>Aprendizaje intensivo y estratégico</li>
                     </ul>
-                    <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                    <a href="https://t.me/chanonatkd_members" class="btn" target="_blank">Ir a Contacto</a>
                 </div>
             </div>
 
             <div class="text-container">
-                <p class="section-text">🔹 ¡Entrena con un referente del Taekwondo en México en Freestyle y Poomsae y forma parte de un entrenamiento de clase mundial! 🔥</p>
-                <p class="section-text">📱 WhatsApp: 961 139 3791<br>📧 Correo: bryantkd52@gmail.com</p>
-                <a href="https://wa.me/529611393791" class="btn" target="_self">Ir a Contacto</a>
+                 <p class="section-text">🔹 ¡Entrena con un referente del Taekwondo en México en Freestyle y Poomsae y forma parte de un entrenamiento de clase mundial! 🔥</p>
+                <p class="section-text">📢 Telegram:</p>
+                <a href="https://t.me/chanonatkd_members" class="btn" target="_blank">Únete a mi canal</a>
+                <p class="section-text" style="margin-top: 15px;">📧 Correo General: chanonatkd98@gmail.com</p>
             </div>
         </section>
 
@@ -580,7 +490,7 @@
         <section id="curriculum" class="section">
             <h1 class="section-title">Mi Currículum y Logros (Lo Más Destacado)</h1>
             <div class="curriculum-text-container">
-                <h2 class="section-title" style="font-size: 1.3em; color: #8B0000;">Como Entrenador:</h2>
+                 <h2 class="section-title" style="font-size: 1.3em; color: #FFD700; background: none; -webkit-background-clip: initial; background-clip: initial; text-shadow: none; margin-bottom: 15px;">Como Entrenador:</h2>
                 <ul>
                     <li>Ex-entrenador de la selección nacional de Poomsae</li>
                     <li>2 medallas de oro, 2 de plata y múltiples de bronce en mundiales por México</li>
@@ -590,7 +500,7 @@
                     <li>MVP como mejor atleta del mundial</li>
                 </ul>
 
-                <h2 class="section-title" style="font-size: 1.3em; color: #8B0000;">Como Atleta:</h2>
+                 <h2 class="section-title" style="font-size: 1.3em; color: #FFD700; background: none; -webkit-background-clip: initial; background-clip: initial; text-shadow: none; margin-top: 30px; margin-bottom: 15px;">Como Atleta:</h2>
                 <ul>
                     <li>Mundialista destacado</li>
                     <li>Mejor Atleta de Canadá (MVP)</li>
@@ -619,83 +529,60 @@
             <h1 class="section-title">Ejercicios</h1>
             <div class="ejercicios-text-container">
                 <p class="section-text">Descubre los mejores ejercicios de Poomsae y Freestyle para llevar tu Taekwondo al siguiente nivel. Estos movimientos, diseñados para atletas de alto rendimiento, te ayudarán a perfeccionar tu técnica y alcanzar la excelencia en el tatami.</p>
-                <a href="https://chanonatkd.github.io/GainerTrick/" class="btn" target="_self">Ir a Ejercicios</a>
+                <a href="https://chanonatkd.github.io/GainerTrick/" class="btn" target="_blank">Ir a Ejercicios</a>
             </div>
         </section>
 
         <section id="contact" class="section">
             <h1 class="section-title">Contacto</h1>
             <div class="text-container">
-                <p class="section-text">Si deseas más información o estás listo para comenzar tu transformación, contáctame directamente:<br><a href="contact.html" target="_self">Ir a Contacto</a></p>
+                <p class="section-text">Si deseas más información o estás listo/a para comenzar tu transformación, contáctame directamente:</p>
+                <p class="section-text" style="margin-bottom: 10px;">
+                    <a href="mailto:chanonatkd98@gmail.com" style="color: #FFD700; text-decoration: none;">📧 Correo: chanonatkd98@gmail.com</a>
+                </p>
+                 <a href="https://t.me/chanonatkd_members" class="btn" target="_blank">Contactar por Telegram</a>
             </div>
         </section>
     </div>
-
-    <a href="https://wa.me/529611393791" class="whatsapp-btn" target="_self">
-        <img src="whatsapp-icon.png" alt="WhatsApp">
-    </a>
 
     <footer>
         <p>© 2025 ChanonaTKD - Todos los derechos reservados</p>
     </footer>
 
     <script>
-        function toggleNav() {
-            const nav = document.getElementById("sideNav");
-            const links = nav.getElementsByTagName('a');
+        const nav = document.getElementById("sideNav");
+        const links = nav.getElementsByTagName('a');
 
-            if (nav.style.width === "250px") {
-                // Cerrar: Desvanecer y mover los enlaces hacia la izquierda
-                for (let link of links) {
-                    link.style.opacity = "0";
-                    link.style.transform = "translateX(-20px)";
-                }
-                setTimeout(() => {
-                    nav.style.width = "0";
-                }, 500); // Espera a que termine la transición de opacidad
+        function toggleNav() {
+            const isOpen = nav.style.width === "250px";
+            if (isOpen) {
+                closeNav();
             } else {
-                // Abrir: Mostrar la barra y luego desvanecer los enlaces hacia su posición
-                nav.style.width = "250px";
-                setTimeout(() => {
-                    for (let link of links) {
-                        link.style.opacity = "1";
-                        link.style.transform = "translateX(0)";
-                    }
-                }, 50); // Pequeño retraso para sincronizar con la apertura
+                openNav();
             }
         }
 
-        // Smooth scrolling con aceleración
-        document.querySelectorAll('.nav-bar a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                const start = window.pageYOffset;
-                const distance = targetElement.getBoundingClientRect().top;
-                let startTime = null;
+        function openNav() {
+             nav.style.width = "250px";
+             setTimeout(() => {
+                 nav.classList.add('open');
+                 for (let link of links) {
+                     link.style.opacity = "1";
+                     link.style.transform = "translateX(0)";
+                 }
+             }, 50);
+        }
 
-                function animation(currentTime) {
-                    if (startTime === null) startTime = currentTime;
-                    const timeElapsed = currentTime - startTime;
-                    const run = easeInOutQuad(timeElapsed, start, distance, 1000);
-                    window.scrollTo(0, run);
-                    if (timeElapsed < 1000) requestAnimationFrame(animation);
-                }
-
-                // Función de easing para un efecto suave con aceleración
-                function easeInOutQuad(t, b, c, d) {
-                    t /= d / 2;
-                    if (t < 1) return c / 2 * t * t + b;
-                    t--;
-                    return -c / 2 * (t * (t - 2) - 1) + b;
-                }
-
-                requestAnimationFrame(animation);
-                const nav = document.getElementById("sideNav");
-                nav.style.width = "0"; // Cierra la barra de navegación después de hacer clic
-            });
-        });
+        function closeNav() {
+             nav.classList.remove('open');
+             for (let link of links) {
+                 link.style.opacity = "0";
+                 link.style.transform = "translateX(-20px)";
+             }
+             setTimeout(() => {
+                 nav.style.width = "0";
+             }, 500);
+        }
     </script>
 </body>
 </html>
